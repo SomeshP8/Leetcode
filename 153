@@ -12,7 +12,7 @@ public:
     return nums[low];
     }
 };
-//method 2:we can solve it directly by sorting the array and prints first element ,but this is not good for interviews and practise
+//method 2:we can solve it directly by sorting the array and prints first element ,but this is not good for interviews and practice
 class Solution {
 public:
     int findMin(vector<int>& nums) {
