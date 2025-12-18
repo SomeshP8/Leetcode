@@ -1,0 +1,22 @@
+method1 1: we can  do it by solving it in o(logn) complexity by binary search comparing low,mid and high values and finally return the value in low;
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+       int n=nums.size();
+     int low=0,high=n-1;
+     while(low<high){
+        int mid=(low+high)/2;
+        if(nums[mid]>nums[high]) low=mid+1;
+        else high=mid;
+    }
+    return nums[low];
+    }
+};
+//method 2:we can solve it directly by sorting the array and prints first element ,but this is not good for interviews and practise
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        return nums[0];
+    }
+};
