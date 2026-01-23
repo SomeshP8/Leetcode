@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool hasMatch(string s, string p) {
+        int p1=p.find("*");
+        string s1=p.substr(0,p1);
+        string s2=p.substr(p1+1);
+        if(s1.length()==0 && s2.length()==0) return true;
+        int p2=0;
+        if(s1.length()>0){
+            p2=s.find(s1);
+            if(p2<0) return false;
+        }
+        int p3=0;
+        if(s2.length()>0){
+            p3=s.find(s2,p2+s1.length());
+            if(p3<0) return false;
+        }
+        return true;
+    }
+};
