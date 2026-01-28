@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isvalid(vector<vector<int>>& grid,int row,int col,int n,int ex){
+        if(row<0 || col<0 || row>=n || col>=n || grid[row][col]!=ex){
+            return false;
+        }
+        if(ex==n*n-1){
+            return true;
+        }
+        int a1=isvalid(grid,row-2,col+1,n,ex+1);
+        int a2=isvalid(grid,row-1,col+2,n,ex+1);
+        int a3=isvalid(grid,row+1,col+2,n,ex+1);
+        int a4=isvalid(grid,row+2,col+1,n,ex+1);
+        int a5=isvalid(grid,row+2,col-1,n,ex+1);
+        int a6=isvalid(grid,row+1,col-2,n,ex+1);
+        int a7=isvalid(grid,row-1,col-2,n,ex+1);
+        int a8=isvalid(grid,row-2,col-1,n,ex+1);
+        return a1 || a2 || a3 || a4 || a5 || a6 || a7 || a8;
+    }
+    bool checkValidGrid(vector<vector<int>>& grid) {
+         return isvalid(grid,0,0,grid.size(),0);
+    }
+};
