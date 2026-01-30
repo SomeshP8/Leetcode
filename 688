@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int n;
+    vector<vector<vector<double>>> memo;
+    vector<pair<int,int>> moves = {
+        {2,1}, {2,-1}, {-2,1}, {-2,-1},
+        {1,2}, {1,-2}, {-1,2}, {-1,-2}
+    };
+    double dfs(int k, int r, int c) {
+        if (r < 0 || r >= n || c < 0 || c >= n)
+            return 0.0;
+        if (k == 0)
+            return 1.0;
+        if (memo[k][r][c] != -1.0)
+            return memo[k][r][c];
+        double prob = 0.0;
+        for (auto &m : moves) {
+            prob += dfs(k - 1, r + m.first, c + m.second);
+        }
+        return memo[k][r][c] = prob / 8.0;
+    }
+    double knightProbability(int n, int k, int row, int column) {
+        this->n = n;
+        memo = vector<vector<vector<double>>>(
+            k + 1, vector<vector<double>>(n, vector<double>(n, -1.0))
+        );
+        return dfs(k, row, column);
+    }
+};
