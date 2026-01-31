@@ -1,0 +1,43 @@
+class Solution {
+public:
+    //    vector<int>som(vector<int> &arr){
+    //    list<int>st;
+    //    for(int i=0;i<arr.size();i++){
+    //     if(arr[i]>0){
+    //         st.push_back(arr[i]);
+    //     }
+    //     else{
+    //         while(!st.empty() && st.back()>0 && st.back()<abs(arr[i])){
+    //             st.pop_back();
+    //         }
+    //     if(!st.empty() && st.back()==abs(arr[i])) st.pop_back();
+    //     else if(st.empty() or st.back()<0) st.push_back(arr[i]);
+    //    } 
+    //    }
+    //    return vector<int>(st.begin(), st.end());;
+    // }
+     vector<int> asteroidCollision(vector<int>& asteroids) {
+            vector<int>st;
+            for(int a:asteroids){
+                bool somesh=false;
+                while(!st.empty() && a<0 && st.back()>0){
+                  if(abs(a)>st.back()){
+                    st.pop_back();
+                  }
+                  else if(abs(a)==st.back()){
+                    st.pop_back();
+                    somesh=true;
+                    break;
+                  }
+                  else{
+                    somesh=true;
+                    break;
+                  }
+                }
+                if(!somesh){
+                    st.push_back(a);
+                }
+            }
+            return st;
+         }
+};
