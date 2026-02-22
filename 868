@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int binaryGap(int n) {
+        int p=-1; 
+        int m=-1;
+        int i=0;
+        while(n)
+        {
+            if(n&1) 
+            {
+                if(p==-1) 
+                {
+                    p=i;          
+                }
+                else 
+                {
+                    m=max(m,i-p);
+                    p=i;   
+                }
+            }
+            n=n>>1;
+            i++;
+        }
+        return m==-1?0:m;
+    }
+};
