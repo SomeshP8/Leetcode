@@ -30,7 +30,6 @@ public:
         int mid=(low+high)/2;
         return query(2*id+1,low,mid,l,r)+query(2*id+2,mid+1,high,l,r);
     }
-
     NumArray(vector<int>& nums) {
         n=nums.size();     
         seg.resize(4*n);
