@@ -1,19 +1,27 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        vector<int> ugly(n);
-        ugly[0] = 1;
-        int i2 = 0, i3 = 0, i5 = 0;
-        for (int i = 1; i < n; i++) {
-            int next2 = ugly[i2] * 2;
-            int next3 = ugly[i3] * 3;
-            int next5 = ugly[i5] * 5;
-            int nextUgly = min({next2, next3, next5});
-            ugly[i] = nextUgly;
-            if (nextUgly == next2) i2++;
-            if (nextUgly == next3) i3++;
-            if (nextUgly == next5) i5++;
+        vector<int> dp(n + 1);
+        dp[0] = 1;
+        int i2 = 0;
+        int i3 = 0;
+        int i5 = 0;
+        for (int i = 1; i <= n; i++) {
+            int aa = dp[i2] * 2;
+            int bb = dp[i3] * 3;
+            int cc = dp[i5] * 5;
+            int mini = min({aa, bb, cc});
+            dp[i] = mini;
+            if (mini == aa) {
+                i2++;
+            }
+            if (mini == bb) {
+                i3++;
+            }
+            if (mini == cc) {
+                i5++;
+            }
         }
-        return ugly[n - 1];
+        return dp[n - 1];
     }
 };
