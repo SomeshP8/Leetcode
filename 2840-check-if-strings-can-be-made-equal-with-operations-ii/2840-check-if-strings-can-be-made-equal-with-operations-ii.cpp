@@ -1,18 +1,21 @@
 class Solution {
 public:
-    bool checkStrings(string s1, string s2) {
-        array<string, 2> A, B;
-        for (int i = 0; i < s1.length(); i++) {
-            int off = i & 1;
-            A[off] += s1[i];
-            B[off] += s2[i];
+    static bool checkStrings(string& s1, string& s2) {
+        array<array<int, 26>, 2> freq{};
+        constexpr array<array<int, 26>, 2> zero{};
+        const int n=s1.size();
+        for(int i=0; i<n; i++){
+            bool iOdd=i&1;
+            freq[iOdd][s1[i]-'a']++;
+            freq[iOdd][s2[i]-'a']--;
         }
-
-        for (int i = 0; i < 2; i++) {
-            sort(A[i].begin(), A[i].end());
-            sort(B[i].begin(), B[i].end());
-        }
-
-        return A == B;
+        return freq==zero;
     }
 };
+
+auto init = []() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();
