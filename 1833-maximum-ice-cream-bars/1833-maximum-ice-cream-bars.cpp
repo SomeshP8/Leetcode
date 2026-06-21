@@ -1,20 +1,28 @@
 class Solution {
 public:
     int maxIceCream(vector<int>& costs, int coins) {
-        sort(costs.begin(), costs.end()); 
-        
-        int count = 0;
-        
+        int maxi = 0;
         for (int cost : costs) {
-            if (coins >= cost) {
-                coins -= cost;
-                count++;
-            } else {
-                break;
+            if (cost > maxi) {
+                maxi = cost;
+            }
+        }
+        vector<int> count(maxi + 1, 0);
+        for (int cost : costs) {
+            count[cost]++;
+        }
+        int bars = 0;
+        int rc = coins;
+        for (int cost = 1; cost <= maxi; ++cost) {
+            if (count[cost] > 0) {
+                int cb = min(count[cost], rc / cost);
+                bars += cb;
+                rc -= cb * cost;
+                if (cb == 0) break;
             }
         }
         
-        return count;
+        return bars;
     }
 };
 
