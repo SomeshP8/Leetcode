@@ -1,32 +1,29 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
-    void f(int i, int t, vector<int>& a, vector<int>& c, vector<vector<int>>& r) {
-        if (t == 0) {
-            r.push_back(c);
+    vector<vector<int>> ans;
+
+    void solve(vector<int>& c, int target, int idx, vector<int>& temp) {
+        if (target == 0) {
+            ans.push_back(temp);
             return;
         }
-        if (i >= a.size() || t < 0) return;
 
-        if (a[i] <= t) {
-            c.push_back(a[i]);
-            f(i, t - a[i], a, c, r);
-            c.pop_back();
-        }
+        if (idx == c.size() || target < 0)
+            return;
 
-        f(i + 1, t, a, c, r);
+        temp.push_back(c[idx]);
+        solve(c, target - c[idx], idx, temp);
+        temp.pop_back();
+
+        solve(c, target, idx + 1, temp);
     }
 
-    vector<vector<int>> combinationSum(vector<int>& a, int t) {
-        vector<vector<int>> r;
-        vector<int> c;
-        f(0, t, a, c, r);
-        return r;
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> temp;
+        solve(candidates, target, 0, temp);
+        return ans;
     }
 };
-
 
 // Synced seamlessly with LeetHub Pro
 // Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
