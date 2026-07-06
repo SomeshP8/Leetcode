@@ -6,7 +6,7 @@ public:
            return a[1]>b[1];
           return a[0]<b[0];
          });
-        int c=0,maxi=0;
+        int c=0,maxi=-1;
         for(auto& interval:intervals){
             if(interval[1]>maxi){
                 c++;
