@@ -20,10 +20,8 @@ public:
             res.push_back(st.top());
             st.pop();
         }
-        while(res.size() > 0 && 
-              res.back() == '0') {
-
-            res.pop_back();
+        while(res.size() > 0 &&  res.back() == '0') {
+         res.pop_back();
         } 
         reverse(res.begin(), res.end());
         if(res.empty()) return "0"; 
