@@ -3,7 +3,7 @@ public:
     long long gcdSum(vector<int>& nums) {
         int n=nums.size();
         vector<int>pref(n);
-        int mx=0;
+        int mx=INT_MIN;
         for(int i=0;i<n;i++){
             mx=max(mx,nums[i]);
             pref[i]=__gcd(nums[i],mx);
