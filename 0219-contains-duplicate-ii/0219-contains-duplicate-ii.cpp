@@ -1,19 +1,21 @@
+#include <vector>
+#include <unordered_set>
+
 class Solution {
 public:
-    bool containsNearbyDuplicate(vector<int>& nums, int k) {
-        int n = nums.size();
-        bool somesh = false;
-        unordered_map<int, int> seen;
-        for(int i = 0; i < n; i++){
-            if(seen.count(nums[i]) && abs(i - seen[nums[i]]) <= k){
-                somesh = true;
-                break; 
+    bool containsNearbyDuplicate(std::vector<int>& nums, int k) {
+        std::unordered_set<int> set;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i > k) {
+                set.erase(nums[i - k - 1]);
             }
-            seen[nums[i]] = i;
+            if (set.count(nums[i])) {
+                return true;
+            }
+            set.insert(nums[i]);
         }
         
-        if(somesh) return true;
-        else return false;
+        return false;
     }
 };
 
