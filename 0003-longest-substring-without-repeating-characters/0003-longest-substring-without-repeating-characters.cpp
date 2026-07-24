@@ -1,23 +1,29 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_set<char> st;
-        int l = 0, r = 0, m = 0;
-        int n = s.size();
-        while (r < n) {
-            if (st.find(s[r]) == st.end()) {
-                st.insert(s[r]);
-                m = max(m, r - l + 1);
-                r++;
-            } else {
-                st.erase(s[l]);
-                l++;
+        int n = s.length();
+        int maxLength = 0;
+        
+        vector<int> charIndex(128, -1); 
+        
+        int left = 0; 
+        
+        for (int right = 0; right < n; right++) {
+            char c = s[right];
+          
+            if (charIndex[c] >= left) {
+        
+                left = charIndex[c] + 1;
             }
+            
+            charIndex[c] = right;
+            
+            maxLength = max(maxLength, right - left + 1);
         }
-        return m;
+        
+        return maxLength;
     }
 };
-
 
 // Synced seamlessly with LeetHub Pro
 // Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
