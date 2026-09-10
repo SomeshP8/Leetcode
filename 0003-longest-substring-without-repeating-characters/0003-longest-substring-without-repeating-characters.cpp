@@ -2,17 +2,16 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
       int n=s.length();
-      int maxi=0;
-      int left=0;
-      vector<int>charc(128,-1);
+      int left=0,maxi=0;
+      vector<int>arr(256,-1);
       for(int right=0;right<n;right++){
-        char c=s[right];
-        if(charc[c]>=left){
-            left=charc[c]+1;
+        if(arr[s[right]]>=left){
+            left=arr[s[right]]+1;
         }
-        charc[c]=right;
+        arr[s[right]]=right;
         maxi=max(maxi,right-left+1);
       }
+      
       return maxi;
     }
 };
