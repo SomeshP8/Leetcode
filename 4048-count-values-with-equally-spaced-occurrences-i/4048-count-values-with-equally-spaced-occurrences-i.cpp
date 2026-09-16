@@ -11,7 +11,7 @@ public:
                 if(mp[i][1]-mp[i][0]==mp[i][2]-mp[i][1]) cnt++;
             }
         }
-        cout<<cnt;
+       // cout<<cnt;
         return cnt;
     }
 };
